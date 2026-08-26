@@ -1,8 +1,8 @@
-# JumpServer SSH Toolkit
+# JumpServer SSH 工具集
 
-Reusable SSH profiles for connecting to servers and network devices through a JumpServer-style SSH gateway. The toolkit uses standard OpenSSH, so it works with macOS Terminal, iTerm2, Linux shells, VS Code Remote SSH, and automation that already supports `ssh`.
+通过 JumpServer 类 SSH 网关连接服务器和网络设备的可复用配置。工具使用标准 OpenSSH，适用于 macOS 终端、iTerm2、Linux Shell、VS Code Remote SSH，以及支持 `ssh` 的自动化工具。
 
-## Quick start
+## 快速开始
 
 1. Copy [`config/ssh_config.example`](config/ssh_config.example) to `~/.ssh/config.d/jumpserver.conf`.
 2. Replace the example gateway, account, asset username, and asset address values.
@@ -25,16 +25,16 @@ Reusable SSH profiles for connecting to servers and network devices through a Ju
    ssh switch-01
    ```
 
-## Authentication
+## 身份认证
 
-Use an SSH key that has been registered in your JumpServer account. Never place a private key, password, one-time code, or challenge value in this repository. `IdentityFile` should point to a local private key with permissions `600`.
+使用已登记到 JumpServer 账户的 SSH 公钥。不要把私钥、密码、动态验证码或质询值放入仓库。`IdentityFile` 应指向本机私钥，文件权限应为 `600`。
 
-## Gateway username model
+## 网关用户名格式
 
-Some deployments encode asset identity in the SSH username:
+部分部署会把资产身份编码到 SSH 用户名中：
 
 ```text
 <domain-user>@<asset-user>@<asset-address>@<gateway-host>
 ```
 
-This is deployment-specific. Confirm the exact syntax and port with your administrator before using the example.
+具体格式因部署而异。使用示例前，应向管理员确认字段顺序和 SSH 端口。
