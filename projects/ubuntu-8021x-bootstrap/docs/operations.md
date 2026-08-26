@@ -1,14 +1,14 @@
-# Operations checklist
+# 运维检查清单
 
-## Before applying
+## 应用前
 
-- Confirm the switch port is configured for the intended EAP method and fallback VLAN behavior.
-- Confirm the RADIUS server expects EAP-TLS and the exact identity format.
-- Verify the certificate chain and private-key permissions.
-- Keep local console access available in case the profile disconnects the host.
-- Test on one non-production host before PXE or fleet rollout.
+- 确认交换机端口的 EAP 方法及后备 VLAN 行为符合预期。
+- 确认 RADIUS 服务器使用 EAP-TLS，并核对身份格式。
+- 验证证书链和私钥权限。
+- 保留本地控制台，以便连接中断时恢复。
+- 在接入 PXE 或批量部署前，先在一台非生产主机上验证。
 
-## After applying
+## 应用后
 
 ```bash
 nmcli connection show --active
@@ -16,11 +16,11 @@ nmcli -f GENERAL,802-1X connection show corp-wired-8021x
 journalctl -u NetworkManager --since -10m
 ```
 
-A successful DHCP lease does not by itself prove 802.1X policy is correct. Confirm the switch and RADIUS logs show an accepted EAP-TLS session and the expected VLAN.
+成功获取 DHCP 地址不能单独证明 802.1X 策略正确。应检查交换机和 RADIUS 日志，确认 EAP-TLS 已接受且 VLAN 符合预期。
 
-## Rollback
+## 回滚
 
-List profiles with `nmcli connection show`, reactivate the previous profile, then remove the generated profile only after network access is restored:
+使用 `nmcli connection show` 列出连接。先重新激活原连接，确认网络恢复后，再删除本工具创建的连接：
 
 ```bash
 sudo nmcli connection up '<previous-profile>'
