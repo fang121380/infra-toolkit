@@ -1,0 +1,22 @@
+# Copy this file to ~/.ssh/config.d/jumpserver.conf and replace every value
+# marked CHANGE_ME. This file intentionally contains no real infrastructure.
+
+Host server-01
+    HostName gateway.example.com
+    Port 2222
+    User CHANGE_ME@CHANGE_ME@203.0.113.10
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    StrictHostKeyChecking ask
+
+Host switch-01
+    HostName gateway.example.com
+    Port 2222
+    User CHANGE_ME@admin@198.51.100.10
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    StrictHostKeyChecking ask
