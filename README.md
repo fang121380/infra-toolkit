@@ -9,6 +9,8 @@ This repository collects small, reviewable tools that came out of real infrastru
 | [`jumpserver-ssh-toolkit`](projects/jumpserver-ssh-toolkit) | Repeatable SSH profiles and connection checks for JumpServer-style gateways | macOS, Linux |
 | [`ubuntu-8021x-bootstrap`](projects/ubuntu-8021x-bootstrap) | Safe, reviewable NetworkManager setup for wired 802.1X/EAP-TLS | Ubuntu 22.04+ |
 
+Android 应用单独维护在 [`hamster-pet-android`](https://github.com/fang121380/hamster-pet-android)，避免把移动端工程、音频和精灵图资源混入运维工具集合。
+
 ## Safety and privacy
 
 - These projects contain no production credentials, private keys, certificates, internal hostnames, or company network addresses.
