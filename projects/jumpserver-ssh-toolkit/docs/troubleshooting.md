@@ -1,16 +1,16 @@
-# Troubleshooting
+# 故障排查
 
 ## `Permission denied (publickey)`
 
-- Confirm the public key is registered in the gateway account.
-- Confirm `IdentityFile` points to the matching private key.
-- Run `chmod 600 ~/.ssh/id_ed25519`.
-- Use `ssh -vv server-01` and check which key OpenSSH offers. Do not paste a full debug log into a public issue if it contains hostnames or usernames.
+- 确认公钥已登记到网关账户。
+- 确认 `IdentityFile` 指向匹配的私钥。
+- 执行 `chmod 600 ~/.ssh/id_ed25519`。
+- 使用 `ssh -vv server-01` 检查 OpenSSH 提交了哪把密钥。若日志包含主机名或用户名，不要将完整日志粘贴到公开议题。
 
-## The gateway rejects the username
+## 网关拒绝用户名
 
-The compound username format is controlled by the gateway deployment. Verify the order of the domain account, asset account, asset address, and gateway host with the administrator. Do not guess by repeatedly attempting production logins.
+复合用户名格式由网关部署决定。请向管理员确认域账户、资产账户、资产地址和网关主机的顺序，不要在生产环境中反复猜测登录格式。
 
 ## VS Code Remote SSH
 
-Use the same alias (`server-01`) in VS Code. Network devices generally are not suitable for Remote SSH because they do not run an SSH server environment compatible with the VS Code server.
+在 VS Code 中使用同一个别名（`server-01`）。交换机和路由器通常无法运行 VS Code Server，因此不适合使用 Remote SSH。
