@@ -1,21 +1,21 @@
-# Ubuntu 802.1X Bootstrap
+# Ubuntu 802.1X 初始化工具
 
-This project is a sanitized reference implementation for preparing an Ubuntu host for wired 802.1X with NetworkManager and EAP-TLS. It is deliberately conservative:
+本项目提供一份脱敏后的参考实现，使用 NetworkManager 和 EAP-TLS 为 Ubuntu 主机配置有线 802.1X。脚本采用保守策略：
 
-- default execution is a dry run;
-- `--apply` is required before changing packages, certificates, or connections;
-- credentials and certificates are supplied through environment variables or local files;
-- the script never contains production addresses or secrets.
+- 默认只试运行，不修改系统；
+- 必须显式传入 `--apply` 才会修改连接；
+- 证书和凭据通过本地配置文件提供；
+- 脚本不包含生产地址或敏感信息。
 
-## Prerequisites
+## 前置条件
 
 - Ubuntu 22.04 or newer
 - NetworkManager and `nmcli`
-- An organization-approved CA certificate and client certificate/private key
-- A certificate identity expected by the RADIUS server
-- Administrative approval to change the host network profile
+- 组织批准的 CA 证书、客户端证书和私钥
+- RADIUS 服务器认可的证书身份
+- 修改主机网络配置的管理员授权
 
-## Usage
+## 使用方法
 
 ```bash
 cp config/8021x.env.example /tmp/8021x.env
@@ -28,10 +28,10 @@ sudo ./scripts/bootstrap-8021x.sh --env-file /tmp/8021x.env
 sudo ./scripts/bootstrap-8021x.sh --env-file /tmp/8021x.env --apply
 ```
 
-The script creates or updates a NetworkManager profile and activates it. Keep an out-of-band console available: changing an active profile can disconnect the machine.
+脚本会创建或更新 NetworkManager 连接并激活。修改当前连接可能导致主机断网，执行时应保留带外控制台。
 
-## Security notes
+## 安全说明
 
-Do not put a private key, key password, challenge password, AD password, SCEP URL, internal IP address, or certificate in Git. Use a local environment file with mode `600` and a certificate/key directory with mode `700`.
+不要把私钥、私钥密码、质询密码、AD 密码、SCEP 地址、内网 IP 或证书提交到 Git。环境文件权限应为 `600`，证书和私钥目录权限建议为 `700`。
 
-This project does not implement AD enrollment, SCEP enrollment, or RADIUS. Those steps are organization-specific and must be handled by approved enrollment tooling before running the profile configuration.
+本项目不实现 AD 加域、SCEP 证书申请或 RADIUS 服务。这些流程与组织环境强相关，应先使用已批准的注册工具完成。
